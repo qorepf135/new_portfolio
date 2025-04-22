@@ -1,0 +1,117 @@
+/* 첨에 페이지열때 로딩하는거처럼 보이게하는 부분 여기서부터 @keyframes spin 까지 */
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.8s ease; /* 부드럽게 사라지게! */
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #999;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.loading-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  font-family: 'Pretendard', sans-serif;
+  opacity: 0.8;
+}
+
+
+/* 메인페이지에서 돋보기 효과주는거 */
+
+#zoom-bg {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  background-image: url('../images/main_bg.jpg'); /* ✅ 배경 이미지 */
+  background-position: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+/* 확대되는 돋보기 효과 */
+#zoom-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 150%;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  pointer-events: none;
+  z-index: -1;
+  transition: transform 0.2s ease-out;
+}
+
+#zoom-bg::before {
+  background-position: var(--x, 50%) var(--y, 50%);
+}
+
+.zoom-text {
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+  color: black;
+  text-align: center;
+}
+
+/* 상단 네비게이션바 고정 */
+header {
+  position: fixed;            /* 고정! */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.815);         /* 배경색 없으면 투명이라 밑에 내용 겹쳐보임 */
+  padding: 1rem 2rem;
+  z-index: 1000;             /* 다른 요소보다 위로! */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 */
+  height: 70px;
+}
+
+header nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+header nav a {
+  text-decoration: none;
+  color: #5e5e5e;
+  font-weight: bold;
+  transition: all 0.3s ease; /* ✨ 부드럽게 바뀌도록 */
+}
+
+header nav a:hover{
+  color: #000000;              /* 색상 바뀜 (예시: 파란색) */
+}
